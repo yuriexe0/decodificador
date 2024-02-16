@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge</title>
+    <link rel="stylesheet" href="./styles/style.css">
+    
+</head>
+
+<body>
+    <header>
+        <img class="img__logo" src="assets/Logo.png" width="120" height="48" alt="Logo Alura">
+        <div class="trilho" id="trilho">
+            <div class="indicador"></div>
+        </div>
+    </header> 
+    <div class="main">
+        <div class="conteiner__label">
+            <label for="originalText"></label>
+            <textarea id="originalText" name="originalText" style="resize: none;" placeholder="Digite seu texto"
+                class="container__text"></textarea>
+                
+            <img class="img__frame" src="./assets/Frame 1.svg" width="215" height="18" alt="frame1">    
+            <div class="buttons">
+            <button class="btn1" onclick="criptografar()" id="criptografar">Criptografar</button>
+            <button class="btn2" onclick="descriptografar()" id="descriptografar">Descriptografar</button>
+        </div>    
+        </div>
+        
+        
+    </div>
+
+    <div class="side">
+        <div class="caixa" id="caixa">
+            <div class="containerCaixa" id="containerCaixa">
+                <img class="img__pesquisa" id="img__pesquisa" src="grammar-correction-animate.svg"
+                    alt="pesssoa fazendo pesquisa">
+                <div class="p" id="p">
+                    <p><strong style="font-size: 1.4rem;"> Nenhuma mensagem encontrada</strong></p>
+                    <p>Digite um texto que você deseja criptografar ou descriptografar.</p>
+                </div>
+            </div>
+            <div id="novoTexto" style="display: none;" class="novoTexto">
+                <textarea id="output" name="output" style="resize: none;" class="output"></textarea>
+                <div id="alerta" class="alerta"></div>
+            </div>
+            <button class="btn3" onclick="copiar()" style="display: none;" id="copiar">Copiar</button>
+        </div>
+    </div>
+    <script src="script.js" defer></script>
+</body>
+
+</html>
