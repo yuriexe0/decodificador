@@ -12,41 +12,53 @@ let body = document.querySelector('body');
 let caixa = document.getElementById('caixa');
 
 
-function criptografar(){
-    const textoInicial = textInput.value;    
-    const textoSemAcentos = textoInicial.normalize('NFD').replace(/[\u0300-\u036f]/g, '');    
-    const textoLowerCase = textoSemAcentos.toLowerCase();   
-    const textoCodificado = textoLowerCase.replace(/e/g, "enter").replace(/i/g, "imes").replace(/a/g, "ai").replace(/o/g, "ober").replace(/u/g, "ufat");
-    console.log(textoCodificado);
-    esconderConteudo();
-    showNewText();
-    let novoTexto = document.getElementById("output")
-    novoTexto.innerHTML = textoCodificado;
+textInput.addEventListener('keypress', function (e) {
+    if (!checkChar(e)) {
+        e.preventDefault();
+    }
+});
+
+function checkChar(e) {
+    let char = String.fromCharCode(e.keyCode);
+    let pattern = '[a-zç,.\\s]';
+    if (char.match(pattern)) {
+        return true;
+    }
 }
 
-function descriptografar(){
-    const textoInicial = textInput.value;    
-    const textoSemAcentos = textoInicial.normalize('NFD').replace(/[\u0300-\u036f]/g, '');    
-    const textoLowerCase = textoSemAcentos.toLowerCase();  
-    const textoDecodificado = textoLowerCase.replace(/ai/g, "a").replace(/enter/g, "e").replace(/imes/g, "i").replace(/ober/g, "o").replace(/ufat/g, "u");
-    console.log(textoDecodificado);  
-    esconderConteudo();
-    showNewText();
-    let novoTexto = document.getElementById("output")
-    novoTexto.innerHTML = textoDecodificado;
+function criptografar() {
+    if (textInput.value != '') {
+        const textoInicial = textInput.value;
+        const textoCodificado = textoInicial.replace(/e/g, "enter").replace(/i/g, "imes").replace(/a/g, "ai").replace(/o/g, "ober").replace(/u/g, "ufat");
+        esconderConteudo();
+        showNewText();
+        let novoTexto = document.getElementById("output")
+        novoTexto.innerHTML = textoCodificado;
+    }
 }
 
-function esconderConteudo(){
+function descriptografar() {
+    if (textInput.value != '') {
+        const textoInicial = textInput.value;
+        const textoDecodificado = textoInicial.replace(/ai/g, "a").replace(/enter/g, "e").replace(/imes/g, "i").replace(/ober/g, "o").replace(/ufat/g, "u");
+        esconderConteudo();
+        showNewText();
+        let novoTexto = document.getElementById("output")
+        novoTexto.innerHTML = textoDecodificado;
+    }
+}
+
+function esconderConteudo() {
     let elementosCaixa = document.getElementById("containerCaixa");
-    elementosCaixa.style.display = "none"; 
+    elementosCaixa.style.display = "none";
 }
 
-function showNewText(){
+function showNewText() {
     document.getElementById("novoTexto").removeAttribute("style");
     document.getElementById("copiar").removeAttribute("style");
 }
 
-trilho.addEventListener('click', (e) =>{
+trilho.addEventListener('click', (e) => {
     trilho.classList.toggle('dark');
     body.classList.toggle('dark');
     textInput.classList.toggle('dark');
@@ -63,18 +75,18 @@ trilho.addEventListener('click', (e) =>{
     } else {
         imgPesquisa.src = 'grammar-correction-animate.svg';
     }
-    
+
 });
 
 const alerta = document.getElementById("alerta");
-btnCopy.addEventListener("click", (e) =>{
+btnCopy.addEventListener("click", (e) => {
     navigator.clipboard.writeText(output.value)
         .then(() => {
             alerta.textContent = 'Texto copiado com sucesso.';
             alerta.style.display = 'block';
             setTimeout(() => {
                 alerta.style.display = 'none';
-            }, 2000); 
+            }, 2000);
         })
         .catch(err => {
             console.error('Erro ao copiar texto: ', err);
